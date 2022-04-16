@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 import Masonry from 'react-masonry-css'
 import './ViewPort.scss'
 
 const Header = () => {
     const getImages = async (offset) => {
         let response = await fetch(
-            `http://xoosha.com/ws/1/test.php?offset=${offset}`,
+            `https://xoosha.com/ws/1/test.php?offset=${offset}`,
             {
                 method: "GET"
             }
@@ -13,14 +14,38 @@ const Header = () => {
         return await response.json();
     };
     const [viewPortData, setViewPortData] = useState({
-        isLoaded: false,
+        isLoaded: true,
+        currentOffset: 0,
         data: []
     })
+    // const handleScroll = (e) => {
+    //     var body = document.body,
+    //         html = document.documentElement;
+    //     var height = Math.max(body.scrollHeight, body.offsetHeight,
+    //         html.clientHeight, html.scrollHeight, html.offsetHeight);
+    //     const windowScrollTop = e.target.documentElement.scrollTop + 820;
+    //     console.log('sda', viewPortData.isLoaded);
+    //     if (windowScrollTop >= height && viewPortData.isLoaded) {
+    //         setViewPortData({
+    //             ...viewPortData,
+    //             isLoaded: false
+    //         })
+    //         getImages(viewPortData.currentOffset + 1).then((res) => {
+    //             setViewPortData({
+    //                 ...viewPortData,
+    //                 isLoaded: true,
+    //                 currentOffset: viewPortData.currentOffset + 1,
+    //                 data: [...viewPortData.data, ...res]
+    //             })
+    //         });
+    //     }
+    // }
     useEffect(() => {
-        getImages(1).then((res) => {
+        getImages(0).then((res) => {
             setViewPortData({
                 ...viewPortData,
-                data: res
+                isLoaded: true,
+                data: [...viewPortData.data, ...res]
             })
         });
     }, []);
@@ -29,9 +54,10 @@ const Header = () => {
             <Masonry className="masonry-wrapper"
                      breakpointCols={4}
                      columnClassName="my-masonry-grid_column"
+
             >
-                {viewPortData.data.map(image => {
-                    return <div className="image-wrapper">
+                {viewPortData.data.map((image, index) => {
+                    return <div key={index} className="image-wrapper">
                         <div className="description">
                             <p>{image.description}</p>
                         </div>
@@ -40,7 +66,6 @@ const Header = () => {
                 })}
             </Masonry>
         </section>
-
     );
 };
 
