@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
 import Masonry from 'react-masonry-css'
 import './ViewPort.scss'
 
