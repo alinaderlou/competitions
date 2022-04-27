@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import './Header.scss'
 import {FaSearch} from 'react-icons/fa';
 
-const Header = () => {
-    const [searchValue, setSearchValue] = useState('')
+const Header = ({searchValue, onSearchValueChanged}) => {
     return (
         <header className="header-wrapper">
             <div className="logo-wrapper">
@@ -19,7 +18,7 @@ const Header = () => {
                         value={searchValue}
                         placeholder="Search photo"
                         onChange={(e => {
-                            setSearchValue(e.target.value)
+                            onSearchValueChanged(e.target.value)
                         })}/>
                 </div>
             </div>

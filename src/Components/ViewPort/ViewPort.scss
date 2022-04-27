@@ -1,7 +1,7 @@
 .view-port-wrapper {
   background-color: #e5e5e5;
-  min-height: 100vw;
-
+  height: 100vh;
+  overflow-y: scroll;
   .masonry-wrapper {
     display: -webkit-box; /* Not needed if autoprefixing */
     display: -ms-flexbox; /* Not needed if autoprefixing */

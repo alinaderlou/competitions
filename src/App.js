@@ -6,7 +6,6 @@ import ViewPort from "./Components/ViewPort/ViewPort";
 function App() {
     return (
         <section>
-            <Header/>
             <ViewPort/>
         </section>
     );
