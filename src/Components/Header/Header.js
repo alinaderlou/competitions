@@ -5,23 +5,26 @@ import {FaSearch} from 'react-icons/fa';
 const Header = ({searchValue, onSearchValueChanged}) => {
     return (
         <header className="header-wrapper">
-            <div className="logo-wrapper">
-                <img className="logo" src="/Images/logo.png" alt="red-wolf-gallery"/>
-            </div>
-            <div className="search-wrapper">
-                <div className="search">
-                    <div className="icon">
-                        <FaSearch/>
+            <div className="col-1">
+                <div className="logo-wrapper">
+                    <img className="logo" src="/Images/logo.png" alt="red-wolf-gallery"/>
+                </div>
+                <div className="search-wrapper">
+                    <div className="search">
+                        <div className="icon">
+                            <FaSearch/>
+                        </div>
+                        <input
+                            type="text"
+                            value={searchValue}
+                            placeholder="Search photo"
+                            onChange={(e => {
+                                onSearchValueChanged(e.target.value)
+                            })}/>
                     </div>
-                    <input
-                        type="text"
-                        value={searchValue}
-                        placeholder="Search photo"
-                        onChange={(e => {
-                            onSearchValueChanged(e.target.value)
-                        })}/>
                 </div>
             </div>
+
             <div className="nav-items-wrapper">
                 <ul className="nav-items">
                     <li className="nav-item">

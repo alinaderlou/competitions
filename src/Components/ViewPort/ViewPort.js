@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import Masonry from 'react-masonry-css'
 import LoadingBar from 'react-top-loading-bar'
 import Header from "../Header/Header";
@@ -15,10 +15,22 @@ const ViewPort = () => {
         data: [],
         filteredData: [],
     })
+    function useWindowSize() {
+        const [size, setSize] = useState([0, 0]);
+        useLayoutEffect(() => {
+            function updateSize() {
+                setSize([window.innerWidth, window.innerHeight]);
+            }
+            window.addEventListener('resize', updateSize);
+            updateSize();
+            return () => window.removeEventListener('resize', updateSize);
+        }, []);
+        return size;
+    }
+    const [width, height] = useWindowSize();
     const onScroll = () => {
         if (listInnerRef.current) {
             const {scrollTop, scrollHeight, clientHeight} = listInnerRef.current;
-            console.log(scrollTop + clientHeight - 0.5, scrollHeight)
             if (scrollTop + clientHeight + 0.5 >= scrollHeight) {
                 loadingRef.current.continuousStart()
                 getImages(viewPortData.currentOffset + 60).then((res) => {
@@ -67,6 +79,7 @@ const ViewPort = () => {
             loadingRef.current.complete()
         });
     }, []);
+
     return (
         <>
 
@@ -75,7 +88,7 @@ const ViewPort = () => {
             }}/>
             <div className="view-port-wrapper" ref={listInnerRef} onScroll={onScroll}>
                 <Masonry className="masonry-wrapper"
-                         breakpointCols={4}
+                         breakpointCols={width>856?4:1}
                          columnClassName="my-masonry-grid_column"
 
                 >
