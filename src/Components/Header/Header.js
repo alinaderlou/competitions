@@ -7,7 +7,7 @@ const Header = ({searchValue, onSearchValueChanged}) => {
         <header className="header-wrapper">
             <div className="col-1">
                 <div className="logo-wrapper">
-                    <img className="logo" src="/Images/logo.png" alt="red-wolf-gallery"/>
+                    <img className="logo" src="/red-wolf-gallery/Images/logo.png" alt="red-wolf-gallery"/>
                 </div>
                 <div className="search-wrapper">
                     <div className="search">

@@ -1,6 +1,7 @@
 {
   "name": "competitions",
   "version": "0.1.0",
+  "homepage": "/red-wolf-gallery/",
   "private": true,
   "engines": {
     "node": "16.x"
